@@ -2,7 +2,7 @@ networks:
   dem:
 services:
   postgres:
-    image: postgres:latest
+    image: postgres:15
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -10,8 +10,6 @@ services:
       POSTGRES_DB: amongoass_db
     ports:
       - "5432:5432"
-    volumes:
-      - ./sql/__init__.py:/docker-entrypoint-initdb.d/init.sql
     networks:
       - dem
   pgadmin:
@@ -23,17 +21,6 @@ services:
       PGADMIN_LISTEN_PORTS: 80
     ports:
       - "5005:80"
-    depends_on:
-      - postgres
-    networks:
-      - dem
-  app:
-    restart: unless-stopped
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - .:/postgres_python
     depends_on:
       - postgres
     networks:

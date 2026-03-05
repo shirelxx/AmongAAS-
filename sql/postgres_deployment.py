@@ -11,14 +11,14 @@ class Base(DeclarativeBase):
 
 
 class Status(enum.Enum):
-    CREATED = 'CREATED',
+    CREATED = 'CREATED'
     DELETED = 'DELETED'
 
 
 class Deployments(Base):
     __tablename__ = "deployment"
 
-    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4(), primary_key=True)
+    id: Mapped[uuid.UUID] = mapped_column(default=uuid.uuid4, primary_key=True)
     db_name: Mapped[str] = mapped_column(String(40))
     status: Mapped[Enum] = mapped_column(Enum(Status))
     username: Mapped[str] = mapped_column(String(40))
