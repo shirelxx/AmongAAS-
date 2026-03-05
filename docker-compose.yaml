@@ -1,4 +1,3 @@
-version: "3"
 networks:
   dem:
 services:
@@ -12,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./sql/__init__.py:/docker-entrypoint-initdb.d/init.sql
     networks:
       - dem
   pgadmin:
@@ -32,7 +31,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: Dockerfile_app
+      dockerfile: Dockerfile
     volumes:
       - .:/postgres_python
     depends_on:
