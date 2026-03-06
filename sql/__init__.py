@@ -26,3 +26,4 @@ while True:
             break
     except Exception as e:
         LOGGER.warning(f"++++ Retrying connection to the database because of the issue {str(e)}++++")
+
