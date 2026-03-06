@@ -1,28 +1,18 @@
-from fastapi import APIRouter, HTTPException
 from datetime import datetime
-import config
 
+from fastapi import APIRouter
+from API.validate import validate_prefix, validate_min_length
+from API.connect import SessionLocal, client
 from API.deployment_models import Deployment
 from sql.postgres_deployment import Deployments, Status
-from API.connect import SessionLocal, client
 
 post_router = APIRouter()
 
 
-def validate(data):
-    if not data.db_name.startswith(config.PREFIX):
-        raise HTTPException(status_code=400,
-                            detail="db name has to start with the user prefix"
-                            )
-    if len(data.username) < config.MIN_LEN:
-        raise HTTPException(status_code=400,
-                            detail="username length has to be above 3"
-                            )
-
-
 @post_router.post("/deployments")
 def create_deployment(data: Deployment):
-    validate(data)
+    validate_prefix(data)
+    validate_min_length(data)
 
     db = client[data.db_name]
     collection = db["deployment"]

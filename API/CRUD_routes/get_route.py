@@ -12,5 +12,5 @@ def create_deployment(deployment_id: str):
     session = SessionLocal()
     deployment = session.query(Deployments).filter(Deployments.id == deployment_id).first()
     if deployment is None:
-        raise HTTPException(status_code=404, detail="Item not found")
+        raise HTTPException(status_code=404, detail="deployment not found")
     return deployment
