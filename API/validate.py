@@ -3,8 +3,8 @@ from fastapi import HTTPException
 import config
 
 
-def validate_prefix(data):
-    if not data.db_name.startswith(config.PREFIX):
+def validate_prefix(db_name):
+    if not db_name.startswith(config.PREFIX):
         raise HTTPException(status_code=400,
                             detail="db name has to start with the user prefix")
 

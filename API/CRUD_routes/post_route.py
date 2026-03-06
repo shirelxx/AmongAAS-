@@ -11,7 +11,7 @@ post_router = APIRouter()
 
 @post_router.post("/deployments")
 def create_deployment(data: Deployment):
-    validate_prefix(data)
+    validate_prefix(data.db_name)
     validate_min_length(data)
 
     db = client[data.db_name]
