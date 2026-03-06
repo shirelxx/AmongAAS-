@@ -25,3 +25,10 @@ services:
       - postgres
     networks:
       - dem
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - dem
