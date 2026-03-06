@@ -2,11 +2,11 @@ from fastapi import APIRouter, HTTPException
 from datetime import datetime
 import config
 
-from API.deployment_model import Deployment
+from API.deployment_models import Deployment
 from sql.postgres_deployment import Deployments, Status
 from API.connect import SessionLocal, client
 
-router = APIRouter()
+post_router = APIRouter()
 
 
 def validate(data):
@@ -20,7 +20,7 @@ def validate(data):
                             )
 
 
-@router.post("/deployments")
+@post_router.post("/deployments")
 def create_deployment(data: Deployment):
     validate(data)
 
